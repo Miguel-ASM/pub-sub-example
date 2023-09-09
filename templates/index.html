@@ -10,9 +10,7 @@
     <button id="server_button">Send to Server</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
     <script>
-      var socket = io.connect(
-        "http://" + document.domain + ":" + location.port
-      );
+      var socket = io.connect(window.location.origin);
       socket.on("message", function (data) {
         var messageDiv = document.createElement("div");
         messageDiv.innerHTML = data.message;
