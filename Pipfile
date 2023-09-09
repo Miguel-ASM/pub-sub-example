@@ -9,6 +9,7 @@ eventlet = "*"
 redis = "*"
 flask = {extras = ["async"], version = "*"}
 flask-cors = "*"
+gunicorn = "*"
 
 [dev-packages]
 
