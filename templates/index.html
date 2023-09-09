@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <div id="messages"></div>
+    <input type="text" id="message_input" />
+    <button id="send_button">Send</button>
+    <button id="server_button">Send to Server</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script>
+      var socket = io.connect(
+        "http://" + document.domain + ":" + location.port
+      );
+      socket.on("message", function (data) {
+        var messageDiv = document.createElement("div");
+        messageDiv.innerHTML = data.message;
+        document.getElementById("messages").appendChild(messageDiv);
+      });
+      document.getElementById("send_button").onclick = function () {
+        var message = document.getElementById("message_input").value;
+        socket.emit("message", { message: message });
+        document.getElementById("message_input").value = "";
+      };
+
+      // Add an event listener for the server message button
+      document.getElementById("server_button").onclick = function () {
+        var serverMessage = prompt("Enter a message for the server:");
+        if (serverMessage) {
+          socket.emit("server_message", { message: serverMessage });
+        }
+      };
+    </script>
+  </body>
+</html>

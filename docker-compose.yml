@@ -1,0 +1,19 @@
+version: "3"
+services:
+  flask-app:
+    build:
+      context: ./
+    ports:
+      - "0.0.0.0:5000:5000"
+    environment:
+      REDIS_HOST: 'redis' # Set the hostname for the Redis service
+    command: bash -c "pipenv install && pipenv run python app.py"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
+  redis:
+    image: redis/redis-stack # Use the official Redis Docker image
+    ports:
+      - "8001:8001"
