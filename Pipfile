@@ -8,7 +8,6 @@ flask-socketio = "*"
 eventlet = "*"
 redis = "*"
 flask = {extras = ["async"], version = "*"}
-aioredis = "*"
 flask-cors = "*"
 
 [dev-packages]
